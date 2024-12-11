@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지 </title>
+    <style>
+        body {
+            background-color: #f7f7f7; /* 배경색 밝은 회색으로 설정 */
+            color: #333; /* 글꼴 색상 어두운 회색으로 설정 */
+            font-family: Arial, sans-serif; /* 폰트 설정 */
+            padding: 20px; /* 간격 설정 */
+        }
+        h1 {
+            color: #333; /* 제목 글꼴 색상 어두운 회색으로 설정 */
+        }
+        form {
+            margin-top: 20px; /* 폼 위 간격 설정 */
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="file"],
+        button,
+        a {
+            background-color: #4CAF50; /* 배경색 녹색으로 설정 */
+            color: white; /* 글꼴 색상 흰색으로 설정 */
+            border: none; /* 테두리 없앰 */
+            padding: 10px 20px; /* 안쪽 여백 설정 */
+            cursor: pointer; /* 포인터 커서로 변경 */
+            border-radius: 5px; /* 모서리를 둥글게 설정 */
+            text-decoration: none; /* 링크에 밑줄 제거 */
+            display: inline-block; /* 인라인 블록 요소로 표시 */
+            text-align: center; /* 텍스트 가운데 정렬 */
+            margin-right: 10px; /* 오른쪽 여백 설정 */
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="file"] {
+            background-color: #fff; /* 배경색 흰색으로 설정 */
+            color: #333; /* 글꼴 색상 어두운 회색으로 설정 */
+            border: 1px solid #ccc; /* 테두리 회색으로 설정 */
+            padding: 8px; /* 안쪽 여백 설정 */
+            margin-bottom: 10px; /* 아래 여백 설정 */
+            border-radius: 5px; /* 모서리를 둥글게 설정 */
+        }
+        button:hover,
+        a:hover {
+            background-color: #45a049; /* 배경색 진한 녹색으로 설정 */
+        }
+    </style>
+</head>
+<body>
+    <h1>마이페이지</h1>
+    <% if (user.profilePic) { %>
+        <img src="<%= user.profilePic %>" alt="프로필 사진" width="150">
+    <% } else { %>
+        <p>프로필 사진이 없습니다.</p>
+    <% } %>
+    <form action="/uploadProfilePic" method="POST" enctype="multipart/form-data">
+        <input type="file" name="profilePic">
+        <button type="submit">사진 업로드</button>
+    </form>
+    <!-- <img src="/mypage.jpg" alt="마이페이지 이미지" width="400" id="mypageImage"> -->
+
+    <form action="/changePassword" method="POST">
+        <div>
+            <label for="username">아이디:</label>
+            <input type="text" id="username" name="username" value="<%= user.username %>" readonly>
+        </div>
+        <div>
+            <label for="currentPassword">현재 비밀번호:</label>
+            <input type="password" id="currentPassword" name="currentPassword" required>
+        </div>
+        <div>
+            <label for="newPassword">새로운 비밀번호:</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+        </div>
+        <div>
+            <label for="confirmNewPassword">비밀번호 확인:</label>
+            <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+        </div>
+        <button type="submit">비밀번호 변경</button>
+        <button type="button" onclick="window.location.href='/diary'">돌아가기</button>
+    </form>
+    
+
+    
+
+</body>
+</html>

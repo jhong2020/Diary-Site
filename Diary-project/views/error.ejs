@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+</head>
+<body>
+    <h1>로그인을 하세요</h1>
+    <p><%= message %></p>
+    <% if (!loggedIn) { %>
+        <a href="/register">회원가입</a>
+        <a href="/login">로그인</a>
+    <% } %>
+</body>
+</html>

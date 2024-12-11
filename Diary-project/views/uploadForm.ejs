@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+</head>
+<body>
+    <h1>마이페이지</h1>
+    <!-- 프로필 사진 업로드를 위한 폼 -->
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="profilePic" name="profilePic" accept="image/*">
+        <button type="button" onclick="uploadProfilePic()">프로필 사진 업로드</button>
+    </form>
+    <!-- 업로드된 프로필 사진을 보여주는 영역 -->
+    <div id="profilePicPreview"></div>
+
+    <script>
+        // 프로필 사진 업로드 함수
+        function uploadProfilePic() {
+            // FormData 객체를 생성하여 파일을 포함한 데이터를 전송합니다.
+            var formData = new FormData();
+            var fileInput = document.getElementById('profilePic');
+            formData.append('profilePic', fileInput.files[0]);
+
+            // AJAX를 이용하여 서버로 프로필 사진을 업로드합니다.
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/uploadProfilePic');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // 업로드된 이미지 경로를 받아와서 이미지를 보여줍니다.
+                    var imgUrl = JSON.parse(xhr.responseText).imgUrl;
+                    document.getElementById('profilePicPreview').innerHTML = `<img src="${imgUrl}" alt="프로필 사진">`;
+                } else {
+                    alert('프로필 사진 업로드에 실패했습니다.');
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>
+</body>
+</html>

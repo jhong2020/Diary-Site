@@ -1,0 +1,29 @@
+<!-- search.ejs -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색 결과</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    
+    <!-- 네비게이션 바 추가 -->
+    <%- include('partials/nav.ejs') %>
+    <div class="container">
+        <h1>검색 결과</h1>
+        <% if (diaries.length > 0) { %>
+            <ul>
+                <% diaries.forEach(diary => { %>
+                    <li>
+                        <span><a href="/diary/<%= diary._id %>"><%= diary.title %></a></span>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>검색 결과가 없습니다.</p>
+        <% } %>
+    </div>
+</body>
+</html>
